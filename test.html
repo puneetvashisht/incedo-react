@@ -1,0 +1,27 @@
+<html>
+<head>
+    <title>Title</title>
+</head>
+<body>
+    <div id="message">Some contents</div>
+    <div>sds jglksdk gsdk </div>
+
+    <button onclick="changeContents()">Change Contents</button>
+
+
+    <script
+  src="http://code.jquery.com/jquery-3.3.1.js"></script>
+    <script>
+        var today = new Date();
+
+        
+
+        function changeContents(){
+            var content = document.getElementById('message').innerHTML
+            $('#message').html("Something else")
+            console.log(content)
+        }
+    </script>
+
+</body>
+</html>
