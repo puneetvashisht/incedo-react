@@ -1,5 +1,3 @@
-// 1. Create a React class
-
 var Badge = React.createClass({
     render: function(){
 
@@ -12,8 +10,4 @@ var Badge = React.createClass({
     }
 })
 
-
-
-
-
-
+module.exports = Badge;

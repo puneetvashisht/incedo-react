@@ -1,13 +1,33 @@
 var gulp = require('gulp');
-var babel = require('gulp-babel')
-var concat = require('gulp-concat')
+var gutil = require('gulp-util');
+var browserify = require('browserify');
+var watchify = require('watchify');
+var babelify = require('babelify');
+var source = require('vinyl-source-stream')
+
+// npm install --save-dev gulp-util browserify watchify babelify vinyl-source-stream
 
 
-gulp.task('task1', function(){
-    gulp.src('./app/**/*.jsx')
-    .pipe(babel({
-        presets: ['react']
-    }))
-    .pipe(concat('bundle.js'))
-    .pipe(gulp.dest('./build'))
+gulp.task('compile', function() {
+    var bundler = watchify(browserify({
+        entries: ['./appes6/app.js'],
+        // transform: [reactify],
+        transform: [["babelify", {presets: ["es2015","react"]}]],
+        extensions: ['.js'],
+        debug: false,
+        cache: {},
+        packageCache: {},
+        fullPaths: true
+    }));
+    function build(file) {
+        if (file) gutil.log('Recompiling ' + file);
+        return bundler
+            .bundle()
+            .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+            .pipe(source('main.js'))
+            .pipe(gulp.dest('./build'));
+    };
+    build();
+    bundler.on('update', build);
+
 })
