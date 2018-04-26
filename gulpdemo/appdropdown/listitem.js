@@ -7,7 +7,8 @@ class ListItem extends Component {
        
     }
 
-    handleItemClick(){
+    handleItemClick(e){
+        e.preventDefault();
         console.log('Select Item, ', this.props.course.name)
         this.props.whenItemClick(this.props.course.name)
     }
