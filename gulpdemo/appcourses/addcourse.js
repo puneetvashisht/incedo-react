@@ -19,7 +19,8 @@ class AddCourse extends Component {
     }
 
     handleClick(e){
-        console.log('On the click event , ', this.state.courseName)
+        // console.log('On the click event , ', this.state.courseName)
+        console.log('On the click event , ', this.input)
         axios.post('http://localhost:3000/courses', {
             name: this.state.courseName
           })
@@ -43,6 +44,9 @@ class AddCourse extends Component {
                 <span className="input-group-text" id="basic-addon1">Course Name</span>
             </div>
             <input type="text" onChange={this.handleChange} value={this.state.courseName} className="form-control" placeholder="React, Angular.. etc" aria-label="Username" aria-describedby="basic-addon1"/>
+            <input type="text" ref={(input) => this.input = input}  className="form-control" placeholder="React, Angular.. etc" aria-label="Username" aria-describedby="basic-addon1"/>
+
+        
             <Button caption="Add Course" whenClick={this.handleClick}/ >
             </div>
         );
